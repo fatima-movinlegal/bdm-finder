@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find your BDM &middot; Movin' Legal</title>
+<meta name="description" content="Enter your postcode to book a meeting with your local Movin' Legal business development manager.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOVIN' LEGAL - BDM ROUTING PAGE
+   ============================================================ */
+:root{
+  --ink:#132348;          /* Movin' Legal navy   */
+  --ink-2:#0B1730;        /* deeper navy         */
+  --paper:#F3F6F8;
+  --paper-2:#FFFFFF;
+  --brass:#38B2A8;        /* Movin' Legal teal   */
+  --brass-lt:#7FD3CC;
+  --moss:#1D7C74;
+  --line:rgba(255,255,255,.15);
+  --line-dk:rgba(19,35,72,.16);
+  --muted:rgba(255,255,255,.66);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-size:16px;line-height:1.5;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 22px}
+
+/* header */
+header{padding:26px 0 0}
+.brand{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:9px;
+}
+.brand{font-size:17px;letter-spacing:.02em;text-transform:uppercase}
+.brand em{font-style:normal;color:var(--brass)}
+.brand small{
+  display:block;font-size:10.5px;letter-spacing:.34em;
+  color:var(--brass);font-weight:600;margin-top:1px;
+}
+
+/* hero */
+main{flex:1;padding:44px 0 60px}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass-lt);margin-bottom:16px;
+}
+h1{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;font-size:clamp(30px,6.8vw,42px);
+  line-height:1.12;letter-spacing:-.02em;margin-bottom:14px;
+}
+.lede{color:var(--muted);font-size:16px;max-width:44ch;margin-bottom:34px}
+
+/* search */
+.field{position:relative}
+label.lbl{
+  display:block;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:9px;
+}
+.inputrow{
+  display:flex;align-items:stretch;
+  background:var(--paper-2);border-radius:3px;
+  border:2px solid transparent;transition:border-color .16s;
+  overflow:hidden;
+}
+.inputrow:focus-within{border-color:var(--brass)}
+#q{
+  flex:1;min-width:0;border:0;outline:0;background:transparent;
+  color:var(--ink);font-family:'Poppins',sans-serif;
+  font-size:17px;font-weight:500;padding:17px 16px;
+}
+#q::placeholder{color:rgba(19,35,72,.42);font-weight:400}
+.chip{
+  display:none;align-items:center;flex:none;
+  background:var(--ink);color:var(--brass-lt);
+  font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;
+  padding:0 15px;letter-spacing:.06em;
+}
+.chip.on{display:flex}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+
+/* suggestions */
+.list{
+  list-style:none;margin-top:8px;
+  background:var(--paper-2);border-radius:3px;
+  max-height:290px;overflow-y:auto;display:none;
+}
+.list.on{display:block}
+.list li{
+  padding:13px 16px;cursor:pointer;color:var(--ink);
+  display:flex;align-items:baseline;gap:12px;
+  border-bottom:1px solid rgba(19,35,72,.09);
+}
+.list li:last-child{border-bottom:0}
+.list li:hover,.list li[aria-selected="true"]{background:rgba(56,178,168,.16)}
+.code{
+  font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:14px;
+  color:var(--moss);min-width:34px;flex:none;
+}
+.town{font-size:15px}
+.nores{padding:15px 16px;color:rgba(19,35,72,.6);font-size:14px}
+
+/* result */
+.result{margin-top:30px;display:none}
+.result.on{display:block;animation:rise .3s cubic-bezier(.2,.7,.3,1)}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.plate{
+  background:linear-gradient(150deg,#45C2B7,#2C9A91 55%,#38B2A8);
+  color:#062723;border-radius:4px;padding:26px 24px 24px;
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
+}
+.plate .role{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.15em;text-transform:uppercase;
+  opacity:.72;margin-bottom:7px;
+}
+.plate .who{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;font-size:26px;letter-spacing:-.015em;line-height:1.14;
+}
+.plate .covers{
+  margin-top:14px;padding-top:14px;
+  border-top:1px solid rgba(6,39,35,.24);
+  font-size:14.5px;line-height:1.45;
+}
+.cta{
+  display:block;width:100%;margin-top:20px;text-align:center;
+  background:var(--ink);color:var(--paper);
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;
+  padding:16px;border-radius:3px;border:0;cursor:pointer;
+  text-decoration:none;transition:background .15s;
+}
+.cta:hover{background:var(--ink-2)}
+.cta.off{background:rgba(6,39,35,.20);color:rgba(6,39,35,.75);cursor:not-allowed}
+.after{margin-top:13px;font-size:13.5px;color:var(--muted);text-align:center;line-height:1.55}
+.after a{color:var(--brass-lt)}
+
+/* fallback */
+.fb{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:4px;padding:24px}
+.fb h2{font-family:'Poppins',sans-serif;font-weight:600;font-size:20px;margin-bottom:9px;letter-spacing:-.01em}
+.fb p{color:var(--muted);font-size:15px}
+.fb a{color:var(--brass-lt)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 30px}
+footer p{font-size:12.5px;color:rgba(255,255,255,.5)}
+footer a{color:var(--brass-lt);text-decoration:none}
+footer a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><div class="brand"><div>Mov<em>in&rsquo;</em><small>Legal</small></div></div></div></header>
+
+<main><div class="wrap">
+  <p class="eyebrow">Broker meetings</p>
+  <h1>Find your local BDM</h1>
+  <p class="lede">Tell us where you're based and we'll put you straight through to the right person's diary.</p>
+
+  <div class="field">
+    <label class="lbl" for="q">Your postcode or town</label>
+    <div class="inputrow">
+      <input id="q" type="text" autocomplete="off" spellcheck="false"
+             placeholder="e.g. M1 4BT, or Manchester"
+             role="combobox" aria-expanded="false" aria-controls="list" aria-autocomplete="list">
+      <div class="chip" id="chip"></div>
+    </div>
+    <p class="hint">Just the first part of your postcode is enough.</p>
+    <ul class="list" id="list" role="listbox" aria-label="Matching areas"></ul>
+  </div>
+
+  <div class="result" id="result"></div>
+</div></main>
+
+<footer><div class="wrap"><p>Movin&rsquo; Legal &mdash; conveyancing for mortgage brokers &nbsp;&middot;&nbsp; <a href="tel:03300249123">0330 024 9123</a></p></div></footer>
+
+<script>
+/* ==============================================================
+   SETTINGS - EDIT THIS BLOCK ONLY
+   ==============================================================
+   1. Paste each person's Microsoft Bookings link between the
+      quote marks after "url:".
+   2. FALLBACK is who gets any postcode we can't match.
+   Nothing below this block needs changing.
+   ============================================================== */
+
+var TEAM = {
+  "Allison Wilson":   { role:"Senior BDM",                       url:"https://outlook.office.com/book/AllisonWilson@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Hayley Callaghan": { role:"Area Director, North",             url:"https://outlook.office.com/book/HayleyCallaghan@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Parmjit Dadyal":   { role:"Area Director, South",             url:"https://outlook.office.com/book/ParmjitDadyal1@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Elyse Turner":     { role:"BDM",                              url:"https://outlook.office.com/book/ElyseTurner@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Claire Curtis":    { role:"BDM",                              url:"https://outlook.office.com/book/ClaireCurtis@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Shawn McConnell":  { role:"BDM",                              url:"https://outlook.office.com/book/ShawnMcConnell@movinlegal.co.uk/?ismsaljsauthenabled" },
+  "Bonnie Carter":    { role:"Business Development Manager, London", url:"https://outlook.office.com/book/BonnieCarter@movinlegal.co.uk/?ismsaljsauthenabled" }
+};
+
+/* Who catches any postcode we can't match. */
+var FALLBACK_NAME  = "Lyndon Whistance";
+var FALLBACK_EMAIL = "Lyndon@movinlegal.co.uk";
+var FALLBACK_URL   = "https://outlook.office.com/book/LyndonWhistance@movinlegal.co.uk/?ismsaljsauthenabled";
+
+/* ============ nothing below here needs editing ============ */
+
+var AREAS = [{"c":"AB","t":"Aberdeen","b":"Allison Wilson"},{"c":"AL","t":"St Albans","b":"Shawn McConnell"},{"c":"B","t":"Birmingham","b":"Elyse Turner"},{"c":"BA","t":"Bath","b":"Claire Curtis"},{"c":"BB","t":"Blackburn","b":"Hayley Callaghan"},{"c":"BD","t":"Bradford","b":"Hayley Callaghan"},{"c":"BH","t":"Bournemouth","b":"Claire Curtis"},{"c":"BL","t":"Bolton","b":"Hayley Callaghan"},{"c":"BN","t":"Brighton","b":"Bonnie Carter"},{"c":"BR","t":"Bromley","b":"Bonnie Carter"},{"c":"BS","t":"Bristol","b":"Claire Curtis"},{"c":"BT","t":"Belfast & Northern Ireland","b":"Hayley Callaghan"},{"c":"CA","t":"Carlisle","b":"Allison Wilson"},{"c":"CB","t":"Cambridge","b":"Shawn McConnell"},{"c":"CF","t":"Cardiff","b":"Claire Curtis"},{"c":"CH","t":"Chester","b":"Hayley Callaghan"},{"c":"CM","t":"Chelmsford","b":"Shawn McConnell"},{"c":"CO","t":"Colchester","b":"Bonnie Carter"},{"c":"CR","t":"Croydon","b":"Bonnie Carter"},{"c":"CT","t":"Canterbury","b":"Bonnie Carter"},{"c":"CV","t":"Coventry","b":"Elyse Turner"},{"c":"CW","t":"Crewe","b":"Hayley Callaghan"},{"c":"DA","t":"Dartford","b":"Shawn McConnell"},{"c":"DD","t":"Dundee","b":"Allison Wilson"},{"c":"DE","t":"Derby","b":"Hayley Callaghan"},{"c":"DG","t":"Dumfries","b":"Allison Wilson"},{"c":"DH","t":"Durham","b":"Allison Wilson"},{"c":"DL","t":"Darlington","b":"Allison Wilson"},{"c":"DN","t":"Doncaster","b":"Hayley Callaghan"},{"c":"DT","t":"Dorchester","b":"Claire Curtis"},{"c":"DY","t":"Dudley","b":"Elyse Turner"},{"c":"E","t":"East London","b":"Bonnie Carter"},{"c":"EC","t":"City of London","b":"Bonnie Carter"},{"c":"EH","t":"Edinburgh","b":"Allison Wilson"},{"c":"EN","t":"Enfield","b":"Shawn McConnell"},{"c":"EX","t":"Exeter","b":"Claire Curtis"},{"c":"FK","t":"Falkirk","b":"Allison Wilson"},{"c":"FY","t":"Blackpool","b":"Hayley Callaghan"},{"c":"G","t":"Glasgow","b":"Allison Wilson"},{"c":"GL","t":"Gloucester","b":"Elyse Turner"},{"c":"GU","t":"Guildford","b":"Parmjit Dadyal"},{"c":"HA","t":"Harrow","b":"Parmjit Dadyal"},{"c":"HD","t":"Huddersfield","b":"Hayley Callaghan"},{"c":"HG","t":"Harrogate","b":"Hayley Callaghan"},{"c":"HP","t":"Hemel Hempstead","b":"Parmjit Dadyal"},{"c":"HR","t":"Hereford","b":"Elyse Turner"},{"c":"HS","t":"Outer Hebrides","b":"Allison Wilson"},{"c":"HU","t":"Hull","b":"Hayley Callaghan"},{"c":"HX","t":"Halifax","b":"Hayley Callaghan"},{"c":"IG","t":"Ilford","b":"Bonnie Carter"},{"c":"IP","t":"Ipswich","b":"Shawn McConnell"},{"c":"IV","t":"Inverness","b":"Allison Wilson"},{"c":"KA","t":"Kilmarnock","b":"Allison Wilson"},{"c":"KT","t":"Kingston upon Thames","b":"Parmjit Dadyal"},{"c":"KW","t":"Kirkwall","b":"Allison Wilson"},{"c":"KY","t":"Kirkcaldy","b":"Allison Wilson"},{"c":"L","t":"Liverpool","b":"Hayley Callaghan"},{"c":"LA","t":"Lancaster","b":"Allison Wilson"},{"c":"LD","t":"Llandrindod Wells","b":"Elyse Turner"},{"c":"LE","t":"Leicester","b":"Elyse Turner"},{"c":"LL","t":"Llandudno","b":"Elyse Turner"},{"c":"LN","t":"Lincoln","b":"Hayley Callaghan"},{"c":"LS","t":"Leeds","b":"Hayley Callaghan"},{"c":"LU","t":"Luton","b":"Shawn McConnell"},{"c":"M","t":"Manchester","b":"Hayley Callaghan"},{"c":"ME","t":"Medway","b":"Bonnie Carter"},{"c":"MK","t":"Milton Keynes","b":"Parmjit Dadyal"},{"c":"ML","t":"Motherwell","b":"Allison Wilson"},{"c":"N","t":"North London","b":"Bonnie Carter"},{"c":"NE","t":"Newcastle upon Tyne","b":"Allison Wilson"},{"c":"NG","t":"Nottingham","b":"Hayley Callaghan"},{"c":"NN","t":"Northampton","b":"Elyse Turner"},{"c":"NP","t":"Newport","b":"Claire Curtis"},{"c":"NR","t":"Norwich","b":"Shawn McConnell"},{"c":"NW","t":"North West London","b":"Bonnie Carter"},{"c":"OL","t":"Oldham","b":"Hayley Callaghan"},{"c":"OX","t":"Oxford","b":"Parmjit Dadyal"},{"c":"PA","t":"Paisley","b":"Allison Wilson"},{"c":"PE","t":"Peterborough","b":"Shawn McConnell"},{"c":"PH","t":"Perth","b":"Allison Wilson"},{"c":"PL","t":"Plymouth","b":"Claire Curtis"},{"c":"PO","t":"Portsmouth","b":"Bonnie Carter"},{"c":"PR","t":"Preston","b":"Hayley Callaghan"},{"c":"RG","t":"Reading","b":"Parmjit Dadyal"},{"c":"RH","t":"Redhill","b":"Bonnie Carter"},{"c":"RM","t":"Romford","b":"Shawn McConnell"},{"c":"S","t":"Sheffield","b":"Hayley Callaghan"},{"c":"SA","t":"Swansea","b":"Claire Curtis"},{"c":"SE","t":"South East London","b":"Bonnie Carter"},{"c":"SG","t":"Stevenage","b":"Shawn McConnell"},{"c":"SK","t":"Stockport","b":"Hayley Callaghan"},{"c":"SL","t":"Slough","b":"Parmjit Dadyal"},{"c":"SM","t":"Sutton","b":"Bonnie Carter"},{"c":"SN","t":"Swindon","b":"Elyse Turner"},{"c":"SO","t":"Southampton","b":"Parmjit Dadyal"},{"c":"SP","t":"Salisbury","b":"Claire Curtis"},{"c":"SR","t":"Sunderland","b":"Allison Wilson"},{"c":"SS","t":"Southend-on-Sea","b":"Shawn McConnell"},{"c":"ST","t":"Stoke-on-Trent","b":"Hayley Callaghan"},{"c":"SW","t":"South West London","b":"Bonnie Carter"},{"c":"SY","t":"Shrewsbury","b":"Elyse Turner"},{"c":"TA","t":"Taunton","b":"Claire Curtis"},{"c":"TD","t":"Galashiels","b":"Allison Wilson"},{"c":"TF","t":"Telford","b":"Elyse Turner"},{"c":"TN","t":"Tonbridge","b":"Bonnie Carter"},{"c":"TQ","t":"Torquay","b":"Claire Curtis"},{"c":"TR","t":"Truro","b":"Claire Curtis"},{"c":"TS","t":"Cleveland","b":"Allison Wilson"},{"c":"TW","t":"Twickenham","b":"Parmjit Dadyal"},{"c":"UB","t":"Uxbridge & Southall","b":"Parmjit Dadyal"},{"c":"W","t":"West London","b":"Bonnie Carter"},{"c":"WA","t":"Warrington","b":"Hayley Callaghan"},{"c":"WC","t":"Covent Garden & Holborn","b":"Bonnie Carter"},{"c":"WD","t":"Watford","b":"Parmjit Dadyal"},{"c":"WF","t":"Wakefield","b":"Hayley Callaghan"},{"c":"WN","t":"Wigan","b":"Hayley Callaghan"},{"c":"WR","t":"Worcester","b":"Elyse Turner"},{"c":"WS","t":"Walsall","b":"Elyse Turner"},{"c":"WV","t":"Wolverhampton","b":"Elyse Turner"},{"c":"YO","t":"York","b":"Hayley Callaghan"},{"c":"ZE","t":"Lerwick","b":"Allison Wilson"}];
+
+var q=document.getElementById('q'), list=document.getElementById('list'),
+    chip=document.getElementById('chip'), result=document.getElementById('result');
+var cur=-1, shown=[];
+
+function areaOf(s){
+  var m=s.toUpperCase().replace(/[^A-Z0-9]/g,'').match(/^([A-Z]{1,2})[0-9]/);
+  return m?m[1]:null;
+}
+function search(raw){
+  var s=raw.trim(); if(!s) return [];
+  var up=s.toUpperCase(), exact=areaOf(s), out=[];
+  if(exact){
+    var hit=AREAS.filter(function(a){return a.c===exact;});
+    if(hit.length) return hit;
+  }
+  AREAS.forEach(function(a){
+    var sc=-1;
+    if(a.c===up) sc=0;
+    else if(a.c.indexOf(up)===0) sc=1;
+    else if(a.t.toUpperCase().indexOf(up)===0) sc=2;
+    else if(a.t.toUpperCase().indexOf(up)>-1) sc=3;
+    if(sc>-1) out.push({a:a,s:sc});
+  });
+  out.sort(function(x,y){return x.s-y.s || x.a.c.localeCompare(y.a.c);});
+  return out.slice(0,60).map(function(o){return o.a;});
+}
+function render(){
+  var v=q.value;
+  var a=areaOf(v);
+  if(a){chip.textContent=a;chip.classList.add('on');}else{chip.classList.remove('on');}
+  shown=search(v); cur=-1;
+  if(!v.trim()){list.classList.remove('on');list.innerHTML='';q.setAttribute('aria-expanded','false');return;}
+  if(!shown.length){
+    list.innerHTML='<li class="nores" role="presentation">No match &mdash; check the postcode, or scroll down to get in touch.</li>';
+    list.classList.add('on'); showFallback(); return;
+  }
+  list.innerHTML=shown.map(function(x,i){
+    return '<li role="option" id="o'+i+'" aria-selected="false" data-i="'+i+'">'+
+           '<span class="code">'+x.c+'</span><span class="town">'+x.t+'</span></li>';
+  }).join('');
+  list.classList.add('on'); q.setAttribute('aria-expanded','true');
+  if(shown.length===1) choose(0);
+}
+function highlight(){
+  [].forEach.call(list.children,function(li,i){
+    li.setAttribute('aria-selected', i===cur?'true':'false');
+    if(i===cur && li.scrollIntoView) li.scrollIntoView({block:'nearest'});
+  });
+}
+function choose(i){
+  var a=shown[i]; if(!a) return;
+  var p=TEAM[a.b]||{}, ready=p.url && p.url.indexOf('PASTE_')!==0;
+  var mine=AREAS.filter(function(x){return x.b===a.b;}).map(function(x){return x.c;}).join(' \u00b7 ');
+  result.innerHTML=
+    '<div class="plate">'+
+      '<p class="role">'+(p.role||'Business development')+'</p>'+
+      '<p class="who">'+a.b+'</p>'+
+      '<p class="covers"><strong>'+a.c+' &mdash; '+a.t+'</strong> is one of the areas '+
+        a.b.split(' ')[0]+' looks after.</p>'+
+    '</div>'+
+    (ready
+      ? '<a class="cta" href="'+p.url+'" target="_blank" rel="noopener">Book a meeting with '+a.b.split(' ')[0]+'</a>'+
+        '<p class="after">Opens '+a.b.split(' ')[0]+'&rsquo;s diary. Pick a time that suits you.<br>Rather talk now? Call <a href="tel:03300249123">0330 024 9123</a>.</p>'
+      : '<button class="cta off" disabled>Booking link not set yet</button>'+
+        '<p class="after">Add this person&rsquo;s Bookings link in the settings block.</p>');
+  result.classList.add('on');
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function showFallback(){
+  var first=FALLBACK_NAME.split(' ')[0];
+  var booking=FALLBACK_URL && FALLBACK_URL.indexOf('PASTE_')!==0;
+  result.innerHTML='<div class="fb"><h2>We couldn&rsquo;t match that postcode</h2>'+
+    '<p>Check the postcode and try again. If it still doesn&rsquo;t come up, '+
+    FALLBACK_NAME+' will point you to the right person.</p></div>'+
+    (booking
+      ? '<a class="cta" href="'+FALLBACK_URL+'" target="_blank" rel="noopener">Book with '+first+'</a>'
+      : '<a class="cta" href="mailto:'+FALLBACK_EMAIL+'?subject=Finding%20my%20BDM">Email '+first+'</a>')+
+    '<p class="after">'+FALLBACK_EMAIL+'</p>';
+  result.classList.add('on');
+}
+q.addEventListener('input',render);
+q.addEventListener('keydown',function(e){
+  if(!list.classList.contains('on')) return;
+  if(e.key==='ArrowDown'){e.preventDefault();cur=Math.min(cur+1,shown.length-1);highlight();}
+  else if(e.key==='ArrowUp'){e.preventDefault();cur=Math.max(cur-1,0);highlight();}
+  else if(e.key==='Enter'){e.preventDefault();choose(cur<0?0:cur);list.classList.remove('on');}
+  else if(e.key==='Escape'){list.classList.remove('on');}
+});
+list.addEventListener('click',function(e){
+  var li=e.target.closest('li[data-i]'); if(!li) return;
+  choose(+li.dataset.i); list.classList.remove('on');
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.field')) list.classList.remove('on');
+});
+</script>
+</body>
+</html>
